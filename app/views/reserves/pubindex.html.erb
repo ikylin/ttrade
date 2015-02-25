@@ -1,0 +1,325 @@
+<div class="container">
+   <div class="row" >
+      <div class="col-xs-8 col-md-offset-2">
+        <div class="jumbotron">
+          <h1>Yes, You can!</h1>
+          <p>生命是一次赛程，每个人都在跨越不同障碍，勇敢去做，相信自己！谁都有机会拿自己的冠军！是的，你能！你能！你能！</p>
+          <p>【<%= if params[:md].nil? then pretradedate(params[:tag]) else params[:md] end %>】</p>
+        </div>
+      </div>
+   </div>
+
+   <div class="row" >
+      <div class="col-xs-12 col-md-offset-0"> 
+
+        <ul class="nav nav-pills" role="tablist">
+          <li role="presentation" class="active"><a href="#r_a" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-font"> </span> <span class="badge"><%=@reserves_A.size%></span></a></li>
+          <li role="presentation"><a href="#r_a2" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-font">- <span class="badge"><%=@reserves_A2.size%></a></li>
+          <li role="presentation"><a href="#r_b" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-bold"> <span class="badge"><%=@reserves_B.size%></a></li>
+          <li role="presentation"><a href="#r_b2" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-bold">- <span class="badge"><%=@reserves_B2.size%></a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="r_a">
+            <div class="panel panel-primary">
+              <div class="panel-heading">【今日组合池】A</div>
+              <div class="panel-body">
+                <!-- Table -->
+                <table class="table table-hover">
+                  <thead>
+                    <tr class="info">
+                      <th>编号</th>
+                      <th>代码</th>
+                      <th>名称</th>
+                      <th>板块</th>
+                      <th>当前价</th>
+                      <th>涨跌</th>
+                      <th>止盈</th>
+                      <th>止损</th>
+                      <th>亏损</th>
+                      <th>盈亏比</th>
+                      <th>仓位</th>
+                      <th>存续周期</th>
+                      <th>捕捉日期</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <% @i = 1 %>
+                    <% @reserves_A.each do |reserve| %>
+                      <tr>
+                        <td><%= @i %></td>
+                        <td><%= reserve.quotation.code unless reserve.quotation.nil? %></td>
+                        <td><%= reserve.quotation.name  unless reserve.quotation.nil? %></td>
+                        <td><%= reserve.quotation.plate  unless reserve.quotation.nil? %></td>
+                        <td><%= number_with_precision reserve.quotation.close, precision: 2  unless reserve.quotation.nil? %></td>
+                        <td><%= number_to_percentage reserve.quotation.dprofit, precision: 2  unless reserve.quotation.nil? %></td>
+                        <td><%= number_with_precision reserve.hhv, precision: 2 %></td>
+                        <td><%= number_with_precision reserve.llv, precision: 2 %></td>
+                        <td><%= number_to_percentage reserve.loss * 100, precision: 0 unless reserve.loss.nil? %></td>
+                        <td><%= number_with_precision reserve.plratio, precision: 1 %></td>
+                        <td><%= number_to_percentage reserve.positionadvise * 100, precision: 0 unless reserve.positionadvise.nil? %></td>
+                        <td><%= reserve.duration %></td>
+                        <td><%= reserve.catchdate %></td>
+                       </tr>
+                      <% @i = @i + 1 %>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+         
+          <div role="tabpanel" class="tab-pane" id="r_a2">   
+            <div class="panel panel-primary">
+              <div class="panel-heading">【今日组合池】A-</div>
+              <div class="panel-body">
+                <!-- Table -->
+                <table class="table table-hover">
+                  <thead>
+                    <tr class="info">
+                      <th>编号</th>
+                      <th>代码</th>
+                      <th>名称</th>
+                      <th>板块</th>
+                      <th>当前价</th>
+                      <th>涨跌</th>
+                      <th>止盈</th>
+                      <th>【止盈A-】</th>
+                      <th>止损</th>
+                      <th>亏损</th>
+                      <th>盈亏比</th>
+                      <th>仓位</th>
+                      <th>存续周期</th>
+                      <th>捕捉日期</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <% @i = 1 %>
+                    <% @reserves_A2.each do |reserve| %>
+                      <tr>
+                        <td><%= @i %></td>
+                        <td><%= reserve.quotation.code unless reserve.quotation.nil? %></td>
+                        <td><%= reserve.quotation.name  unless reserve.quotation.nil? %></td>
+                        <td><%= reserve.quotation.plate  unless reserve.quotation.nil? %></td>
+                        <td><%= number_with_precision reserve.quotation.close, precision: 2  unless reserve.quotation.nil? %></td>
+                        <td><%= number_to_percentage reserve.quotation.dprofit, precision: 2  unless reserve.quotation.nil? %></td>
+                        <td><%= number_with_precision reserve.hhv, precision: 2 %></td>
+                        <td><%= number_with_precision reserve.hhvadjust, precision: 2 %></td>
+                        <td><%= number_with_precision reserve.llv, precision: 2 %></td>
+                        <td><%= number_to_percentage reserve.loss * 100, precision: 0 unless reserve.loss.nil? %></td>
+                        <td><%= number_with_precision reserve.plratio, precision: 1 %></td>
+                        <td><%= number_to_percentage reserve.positionadvise * 100, precision: 0 unless reserve.positionadvise.nil? %></td>
+                        <td><%= reserve.duration %></td>
+                        <td><%= reserve.catchdate %></td>
+                       </tr>
+                      <% @i = @i + 1 %>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div role="tabpanel" class="tab-pane" id="r_b">      
+            <div class="panel panel-primary">
+              <div class="panel-heading">【今日组合池】B</div>
+              <div class="panel-body">
+                <!-- Table -->
+                <table class="table table-hover">
+                  <thead>
+                    <tr class="info">
+                      <th>编号</th>
+                      <th>代码</th>
+                      <th>名称</th>
+                      <th>板块</th>
+                      <th>当前价</th>
+                      <th>涨跌</th>
+                      <th>止盈</th>
+                      <th>【止盈B】</th>
+                      <th>止损</th>
+                      <th>亏损</th>
+                      <th>盈亏比</th>
+                      <th>仓位</th>
+                      <th>存续周期</th>
+                      <th>捕捉日期</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <% @i = 1 %>
+                    <% @reserves_B.each do |reserve| %>
+                      <tr>
+                        <td><%= @i %></td>
+                        <td><%= reserve.quotation.code unless reserve.quotation.nil? %></td>
+                        <td><%= reserve.quotation.name  unless reserve.quotation.nil? %></td>
+                        <td><%= reserve.quotation.plate  unless reserve.quotation.nil? %></td>
+                        <td><%= number_with_precision reserve.quotation.close, precision: 2  unless reserve.quotation.nil? %></td>
+                        <td><%= number_to_percentage reserve.quotation.dprofit, precision: 2  unless reserve.quotation.nil? %></td>
+                        <td><%= number_with_precision reserve.hhv, precision: 2 %></td>
+                        <td><%= number_with_precision reserve.hhvadjust, precision: 2 %></td>
+                        <td><%= number_with_precision reserve.llv, precision: 2 %></td>
+                        <td><%= number_to_percentage reserve.loss * 100, precision: 0 unless reserve.loss.nil? %></td>
+                        <td><%= number_with_precision reserve.plratio, precision: 1 %></td>
+                        <td><%= number_to_percentage reserve.positionadvise * 100, precision: 0 unless reserve.positionadvise.nil? %></td>
+                        <td><%= reserve.duration %></td>
+                        <td><%= reserve.catchdate %></td>
+                       </tr>
+                      <% @i = @i + 1 %>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div role="tabpanel" class="tab-pane" id="r_b2">
+            <div class="panel panel-primary">
+              <div class="panel-heading">【今日组合池】B-</div>
+              <div class="panel-body">
+                <!-- Table -->
+                <table class="table table-hover">
+                  <thead>
+                    <tr class="info">
+                      <th>编号</th>
+                      <th>代码</th>
+                      <th>名称</th>
+                      <th>板块</th>
+                      <th>当前价</th>
+                      <th>涨跌</th>
+                      <th>止盈</th>
+                      <th>【止盈B-】</th>
+                      <th>止损</th>
+                      <th>亏损</th>
+                      <th>盈亏比</th>
+                      <th>仓位</th>
+                      <th>存续周期</th>
+                      <th>捕捉日期</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <% @i = 1 %>
+                    <% @reserves_B2.each do |reserve| %>
+                      <tr>
+                        <td><%= @i %></td>
+                        <td><%= reserve.quotation.code unless reserve.quotation.nil? %></td>
+                        <td><%= reserve.quotation.name  unless reserve.quotation.nil? %></td>
+                        <td><%= reserve.quotation.plate  unless reserve.quotation.nil? %></td>
+                        <td><%= number_with_precision reserve.quotation.close, precision: 2  unless reserve.quotation.nil? %></td>
+                        <td><%= number_to_percentage reserve.quotation.dprofit, precision: 2  unless reserve.quotation.nil? %></td>
+                        <td><%= number_with_precision reserve.hhv, precision: 2 %></td>
+                        <td><%= number_with_precision reserve.hhvadjust, precision: 2 %></td>
+                        <td><%= number_with_precision reserve.llv, precision: 2 %></td>
+                        <td><%= number_to_percentage reserve.loss * 100, precision: 0 unless reserve.loss.nil? %></td>
+                        <td><%= number_with_precision reserve.plratio, precision: 1 %></td>
+                        <td><%= number_to_percentage reserve.positionadvise * 100, precision: 0 unless reserve.positionadvise.nil? %></td>
+                        <td><%= reserve.duration %></td>
+                        <td><%= reserve.catchdate %></td>
+                       </tr>
+                      <% @i = @i + 1 %>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+   </div>
+
+   <div class="row" >
+      <div class="col-xs-12 col-md-offset-0"> 
+        <div class="panel panel-success">
+          <div class="panel-heading">【今日止盈】</div>
+          <div class="panel-body">
+            <!-- Table -->
+            <table class="table table-hover">
+              <thead>
+                <tr class="info">
+                  <th>编号</th>
+                  <th>代码</th>
+                  <th>名称</th>
+                  <th>板块</th>
+                  <th>当前价</th>
+                  <th>涨跌</th>
+                  <th>止盈</th>
+                  <th>止损</th>
+                  <th>存续周期</th>
+                  <th>捕捉日期</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% @i = 1 %>
+                <% @cutprofit.each do |reserve| %>
+                  <tr>
+                    <td><%= @i %></td>
+                    <td><%= reserve.quotation.code unless reserve.quotation.nil? %></td>
+                    <td><%= reserve.quotation.name  unless reserve.quotation.nil? %></td>
+                    <td><%= reserve.quotation.plate  unless reserve.quotation.nil? %></td>
+                    <td><%= number_with_precision reserve.quotation.close, precision: 2  unless reserve.quotation.nil? %></td>
+                    <td><%= number_to_percentage reserve.quotation.dprofit, precision: 2  unless reserve.quotation.nil? %></td>
+                    <td><%= number_with_precision reserve.hhv, precision: 2 %></td>
+                    <td><%= number_with_precision reserve.llv, precision: 2 %></td>
+                    <td><%= reserve.duration %></td>
+                    <td><%= reserve.catchdate %></td>
+                   </tr>
+                  <% @i = @i + 1 %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+   </div>
+
+   <div class="row" >
+      <div class="col-xs-12 col-md-offset-0"> 
+        <div class="panel panel-danger">
+          <div class="panel-heading">【今日止损】</div>
+          <div class="panel-body">
+            <!-- Table -->
+            <table class="table table-hover">
+              <thead>
+                <tr class="info">
+                  <th>编号</th>
+                  <th>代码</th>
+                  <th>名称</th>
+                  <th>板块</th>
+                  <th>当前价</th>
+                  <th>涨跌</th>
+                  <th>止盈</th>
+                  <th>止损</th>
+                  <th>存续周期</th>
+                  <th>捕捉日期</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% @i = 1 %>
+                <% @cutloss.each do |reserve| %>
+                  <tr>
+                    <td><%= @i %></td>
+                    <td><%= reserve.quotation.code unless reserve.quotation.nil? %></td>
+                    <td><%= reserve.quotation.name  unless reserve.quotation.nil? %></td>
+                    <td><%= reserve.quotation.plate  unless reserve.quotation.nil? %></td>
+                    <td><%= number_with_precision reserve.quotation.close, precision: 2  unless reserve.quotation.nil? %></td>
+                    <td><%= number_to_percentage reserve.quotation.dprofit, precision: 2  unless reserve.quotation.nil? %></td>
+                    <td><%= number_with_precision reserve.hhv, precision: 2 %></td>
+                    <td><%= number_with_precision reserve.llv, precision: 2 %></td>
+                    <td><%= reserve.duration %></td>
+                    <td><%= reserve.catchdate %></td>
+                   </tr>
+                  <% @i = @i + 1 %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+   </div>
+
+
+</div>

@@ -1,0 +1,13 @@
+<%= simple_form_for @imgdepot, :html => { :class => 'form-horizontal', :multipart => true } do |f| %>
+  <%= f.input :titile %>
+  <%= error_span(@imgdepot[:titile]) %>
+  <%= f.input :summary %>
+  <%= error_span(@imgdepot[:summary]) %>
+
+  <%= f.label :imgfile %>  
+  <%= f.file_field :imgfile %>
+
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                imgdepots_path, :class => 'btn btn-default' %>
+<% end %>

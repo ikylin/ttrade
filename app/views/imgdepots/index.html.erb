@@ -1,0 +1,58 @@
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_imgdepot_path,
+            :class => 'btn btn-primary' %>
+
+<%- model_class = Imgdepot -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<ul class="pagination">
+  <%= will_paginate @imgdepots %>
+</ul>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:titile) %></th>
+      <th><%= model_class.human_attribute_name(:summary) %></th>
+      <th><%= model_class.human_attribute_name(:imgfile) %></th>
+      <th><%= model_class.human_attribute_name(:imgfile_file_name) %></th>
+      <th><%= model_class.human_attribute_name(:imgfile_content_type) %></th>
+      <th><%= model_class.human_attribute_name(:imgfile_file_size) %></th>
+      <th><%= model_class.human_attribute_name(:imgfile_updated_at) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @imgdepots.each do |imgdepot| %>
+      <tr>
+        <td><%= link_to imgdepot.id, imgdepot_path(imgdepot) %></td>
+        <td><%= imgdepot.titile %></td>
+        <td><%= imgdepot.summary %></td>
+        <td><%= image_tag imgdepot.imgfile.url(:thumb) %></td>
+        <td><%= imgdepot.imgfile_file_name %></td>
+        <td><%= imgdepot.imgfile_content_type %></td>
+        <td><%= imgdepot.imgfile_file_size %></td>
+        <td><%= imgdepot.imgfile_updated_at %></td>
+        <td><%=l imgdepot.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_imgdepot_path(imgdepot), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      imgdepot_path(imgdepot),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<ul class="pagination">
+  <%= will_paginate @imgdepots %>
+</ul>
+

@@ -1,0 +1,19 @@
+<%= simple_form_for @ebook, :html => { :class => 'form-horizontal', :multipart => true  } do |f| %>
+  <%= f.input :title %>
+  <%= error_span(@ebook[:title]) %>
+  <%= f.input :description %>
+  <%= error_span(@ebook[:description]) %>
+  <%= f.input :wwwlink %>
+  <%= error_span(@ebook[:wwwlink]) %>
+  <%= f.input :summary %>
+  <%= error_span(@ebook[:summary]) %>
+  <%= f.input :rate %>
+  <%= error_span(@ebook[:rate]) %>
+
+  <%= f.label :frontcover %>  
+  <%= f.file_field :frontcover %>
+
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                ebooks_path, :class => 'btn btn-default' %>
+<% end %>

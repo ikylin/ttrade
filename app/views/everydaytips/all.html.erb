@@ -1,0 +1,32 @@
+<%- model_class = Everydaytip -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<ul class="pagination">
+  <%= will_paginate @everydaytips %>
+</ul>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:tip) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @everydaytips.each do |everydaytip| %>
+      <tr>
+        <td><%= link_to everydaytip.id, everydaytip_path(id: everydaytip.id) %></td>
+        <td><%= everydaytip.tip %></td>
+        <td><%=l everydaytip.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<ul class="pagination">
+  <%= will_paginate @everydaytips %>
+</ul>
+

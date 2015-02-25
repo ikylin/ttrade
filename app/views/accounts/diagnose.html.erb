@@ -1,0 +1,352 @@
+<div id="zhexian" style="height:400px"></div>
+<div id="zhu" style="height:400px"></div>
+<div id="kxian" style="height:400px"></div>
+
+<script type="text/javascript">
+
+  require.config({
+      paths: {
+          echarts: './'
+      }
+  });
+
+  function linepaint(xdata, sdata){
+    require(
+      [
+        'echarts',
+        'echarts/chart/line'
+      ],
+
+      function (ec){
+        var myChart = ec.init(document.getElementById('zhexian'));
+        
+        var option = {
+          title : {
+              text: '未来一周气温变化',
+              subtext: '纯属虚构'
+          },
+          tooltip : {
+              trigger: 'axis'
+          },
+          legend: {
+              data:['最高气温']
+          },
+          toolbox: {
+              show : true,
+              feature : {
+                  mark : {show: true},
+                  dataView : {show: true, readOnly: false},
+                  magicType : {show: true, type: ['line']},
+                  restore : {show: true},
+                  saveAsImage : {show: true}
+              }
+          },
+          calculable : true,
+          dataZoom : {
+              show : true,
+              realtime : true,
+              start : 0,
+              end : 100
+          },
+          xAxis : [
+              {
+                  type : 'category',
+                  boundaryGap : false,
+                  data : xdata 
+              }
+          ],
+          yAxis : [
+              {
+                  type : 'value',
+                  axisLabel : {
+                      formatter: '{value} °C'
+                  }
+              }
+          ],
+          series : [
+              {
+                  name:'最高气温',
+                  type:'line',
+                  itemStyle: {
+                    normal:{
+                      color:'#6495ed'
+                    }
+                  },
+                  data: sdata,
+                  markPoint : {
+                      data : [
+                          {type : 'max', name: '最大值'},
+                          {type : 'min', name: '最小值'}
+                      ]
+                  },
+                  markLine : {
+                      data : [
+                          {type : 'average', name: '平均值'}
+                      ]
+                  }
+              }
+          ]
+        };            
+        myChart.setOption(option);
+      }
+    );
+  }
+
+
+  function barpaint(xdata, sdata){
+    require(
+      [
+        'echarts',
+        'echarts/chart/bar'
+      ],
+
+      function (ec){
+
+      var myzhuChart = ec.init(document.getElementById('zhu'));
+      
+      var option = {
+        title : {
+            text: '某地区蒸发量和降水量',
+            subtext: '纯属虚构'
+        },
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['蒸发量']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        dataZoom : {
+            show : true,
+            realtime : true,
+            start : 0,
+            end : 100
+        },
+        xAxis : [
+            {
+                type : 'category',
+                data : ['1388592000','1388678400','1388937600','1389024000','1389110400','1389196800','1389283200','1389542400','1389628800','1389715200','1389801600','1389888000','1390147200','1390233600','1390320000','1390406400','1390492800','1390752000','1390838400','1390924800','1391011200','1391702400','1391961600','1392048000','1392134400','1392220800','1392307200','1392566400','1392652800','1392739200','1392825600','1392912000','1393171200','1393257600','1393344000','1393430400','1393516800','1393776000','1393862400','1393948800','1394035200','1394121600','1394380800','1394467200','1394553600','1394640000','1394726400','1394985600','1395072000','1395158400','1395244800','1395331200','1395590400','1395676800','1395763200','1395849600','1395936000','1396195200','1396281600','1396368000','1396454400','1396540800','1396886400','1396972800','1397059200','1397145600','1397404800','1397491200','1397577600','1397664000','1397750400','1398009600','1398096000','1398182400','1398268800','1398355200','1398614400','1398700800','1398787200','1399219200','1399305600','1399392000','1399478400','1399564800','1399824000','1399910400','1399996800','1400083200','1400169600','1400428800','1400515200','1400601600','1400688000','1400774400','1401033600','1401120000','1401206400','1401292800','1401379200','1401724800','1401811200','1401897600','1401984000','1402243200','1402329600','1402416000','1402502400','1402588800','1402848000','1402934400','1403020800','1403107200','1403193600','1403452800','1403539200','1403625600','1403712000','1403798400','1404057600','1404144000','1404230400','1404316800','1404403200','1404662400','1404748800','1404835200','1404921600','1405008000','1405267200','1405353600','1405440000','1405526400','1405612800','1405872000','1405958400','1406044800','1406131200','1406217600','1406476800','1406563200','1406649600','1406736000','1406822400','1407081600'] 
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value'
+            }
+        ],
+        series : [
+            {
+                name:'蒸发量',
+                type:'bar',
+                itemStyle: {
+                  normal:{
+                    color:'#6495ed'
+                  }
+                },
+                data:[-1.43,-2.44,-6.8,-0.89,-0.83,5.39,2.3,0.26,5.7,-2.09,0.38,1.77,-1.66,4,-2.8,0.05,6.5,-3.55,-3.61,-3.97,7.47,8.44,14.64,-2.36,-0.72,-1.23,-5.63,-3.88,2.49,6.26,3.3,1.63,1.73,10.52,-0.47,1.8,-1.1,-3.45,4.09,0.11,7.72,2.04,8.63,-2.14,1.56,-3.63,1.07,4.03,-1.25,8.68,6.45,18.55,-2.68,0.3,-0.8,10.31,6.04,-6.35,0.58,-5.97,8.28,6.16,2.54,0.4,11.83,-4,-3,-2.89,-1.9,-8.77,1.02,3.55,-1.91,-2.18,-7.05,-9.05,2.75,0.66,0.21,10.77,3.87,-2.06,8.12,1.23,9.84,2.1,-0.5,0.42,-5.47,3.91,3.65,2.86,6.09,1.56,2.51,-1.98,3.86,4.15,-4.81,-6.23,8.8,4.77,4.57,0.3,1.88,-1.43,-0.29,2.55,-5.1,3.42,-2.7,4.3,-4.1,-0.64,-0.04,-2.6,1.83,-0.18,4.67,-3.17,2.93,3.6,-0.91,-5.22,2,4.4,-0.79,-0.52,2.67,-1.78,-5.42,0.76,3.7,-0.37,4.55,-5.18,10.79,-1.72,17.25,-0.94,-7.65,4.43,-1.6,2.86],
+                markPoint : {
+                    data : [
+                        {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183, symbolSize:18},
+                        {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name : '平均值'}
+                    ]
+                }
+            }
+        ]
+    };          
+    myzhuChart.setOption(option);
+   
+
+      }
+    );
+  }
+
+
+  function kpaint(mdata, vdata, kdata){
+    require(
+      [
+        'echarts',
+        'echarts/chart/k'
+      ],
+
+      function (ec){
+
+        var mykxianChart = ec.init(document.getElementById('kxian'));
+        
+        var option = {
+        title : {
+            text: '2013年上半年上证指数'
+        },
+        tooltip : {
+            trigger: 'axis',
+            formatter: function (params) {
+                var res = params[0].name;
+                for (var i = params.length - 1; i >= 0; i--) {
+                    if (params[i].value instanceof Array) {
+                        res += '<br/>' + params[i].seriesName;
+                        res += '<br/>  开盘 : ' + params[i].value[0] + '  最高 : ' + params[i].value[3];
+                        res += '<br/>  收盘 : ' + params[i].value[1] + '  最低 : ' + params[i].value[2];
+                    }
+                    else {
+                        res += '<br/>' + params[i].seriesName;
+                        res += ' : ' + params[i].value;
+                    }
+                }
+                return res;
+            }
+        },
+        legend: {
+            data:['上证指数','成交金额(万)']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataZoom : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        dataZoom : {
+            show : true,
+            realtime: true,
+            start : 50,
+            end : 100
+        },
+        xAxis : [
+            {
+                type : 'category',
+                boundaryGap : true,
+                axisTick: {onGap:false},
+                splitLine: {show:false},
+                data : mdata 
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value',
+                scale:true,
+                splitNumber: 5,
+                boundaryGap: [0.01, 0.01]
+            },
+            {
+                type : 'value',
+                scale:true,
+                splitNumber: 5,
+                boundaryGap: [0.05, 0.05],
+                axisLabel: {
+                    formatter: function (v) {
+                        return Math.round(v/10000) + ' 万'
+                    }
+                }
+            }
+        ],
+        series : [
+            {
+                name:'成交金额(万)',
+                type:'line',
+                yAxisIndex: 1,
+                symbol: 'none',
+                data: vdata,
+                markPoint : {
+                    symbol: 'emptyPin',
+                    itemStyle : {
+                        normal : {
+                            color:'#1e90ff',
+                            label : {
+                                show:true,
+                                position:'top',
+                                formatter: function (a,b,v) {
+                                    return Math.round(v/10000) + ' 万'
+                                }
+                            }
+                        }
+                    },
+                    data : [
+                        {type : 'max', name: '最大值', symbolSize:5},
+                        {type : 'min', name: '最小值', symbolSize:5}
+                    ]
+                },
+                markLine : {
+                    symbol : 'none',
+                    itemStyle : {
+                        normal : {
+                            color:'#1e90ff',
+                            label : {
+                                show:true,
+                                formatter: function (a,b,v) {
+                                    return Math.round(v/10000) + ' 万'
+                                }
+                            }
+                        }
+                    },
+                    data : [
+                        {type : 'average', name: '平均值'}
+                    ]
+                }
+            },
+            {
+                name:'上证指数',
+                type:'k',
+                data: kdata
+            }
+        ]
+    }; 
+    mykxianChart.setOption(option);
+
+      }
+    );
+  }
+
+
+
+
+  $.getJSON('/ajaxdata/account', function(data){
+    xdata = [];
+    sdata = [];
+    $.each(data, function(i, item){
+      xdata.push(item.marketdate);
+      sdata.push(item.close);
+    });
+    linepaint(xdata, sdata);
+
+    barpaint(xdata, sdata);
+    kpaint(xdata, sdata);
+  });
+
+  $.getJSON('/ajaxdata/quotation', function(data){
+    mdata = [];
+    vdata = [];
+    kdata = [];
+    $.each(data, function(i, item){
+      kidata = [];
+      mdata.push(item.marketdate);
+      vdata.push(typeof(item.volume) == 'number' ? item.volume : 0);
+
+      kidata.push(item.open);
+      kidata.push(item.close);
+      kidata.push(item.low);
+      kidata.push(item.high);
+      kdata.push(kidata);
+    });
+    kpaint(mdata, vdata, kdata);
+  });
+
+
+ 
+</script>

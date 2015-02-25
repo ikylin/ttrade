@@ -1,0 +1,22 @@
+<%= simple_form_for @indexfilter, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :name %>
+  <%= error_span(@indexfilter[:name]) %>
+  <%= f.input :script %>
+  <%= error_span(@indexfilter[:script]) %>
+  <%= f.input :platform %>
+  <%= error_span(@indexfilter[:platform]) %>
+  <%= f.input :samplecount %>
+  <%= error_span(@indexfilter[:samplecount]) %>
+  <%= f.input :wincount %>
+  <%= error_span(@indexfilter[:wincount]) %>
+  <%= f.input :losscount %>
+  <%= error_span(@indexfilter[:losscount]) %>
+  <%= f.input :marketdatecount %>
+  <%= error_span(@indexfilter[:marketdatecount]) %>
+  <%= f.input :summary %>
+  <%= error_span(@indexfilter[:summary]) %>
+
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                indexfilters_path, :class => 'btn btn-default' %>
+<% end %>

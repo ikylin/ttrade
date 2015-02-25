@@ -1,0 +1,41 @@
+<%- model_class = Ebook -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
+  <dd><%= @ebook.title %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @ebook.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:wwwlink) %>:</strong></dt>
+  <dd><%= @ebook.wwwlink %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:summary) %>:</strong></dt>
+  <dd><%= @ebook.summary %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:frontcover) %>:</strong></dt>
+  <dd><%= image_tag @ebook.frontcover.url(:small) %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:frontcover_file_name) %>:</strong></dt>
+  <dd><%= @ebook.frontcover_file_name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:frontcover_content_type) %>:</strong></dt>
+  <dd><%= @ebook.frontcover_content_type %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:frontcover_file_size) %>:</strong></dt>
+  <dd><%= @ebook.frontcover_file_size %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:frontcover_updated_at) %>:</strong></dt>
+  <dd><%= @ebook.frontcover_updated_at %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:rate) %>:</strong></dt>
+  <dd><%= @ebook.rate %></dd>
+</dl>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              ebooks_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_ebook_path(@ebook), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              ebook_path(@ebook),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+<%= link_to t('.new_tip', :default => t("helpers.links.new_tip")),
+              new_ebook_everydaytip_path(@ebook), :class => 'btn btn-default'  %>
+<%= link_to t('.tips', :default => t("helpers.links.tips")),
+              ebook_everydaytips_path(@ebook), :class => 'btn btn-default'  %>

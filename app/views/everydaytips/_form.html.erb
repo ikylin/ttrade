@@ -1,0 +1,8 @@
+<%= simple_form_for @everydaytip, url: @ebook.nil? ? everydaytip_path(@everydaytip) : ebook_everydaytips_path(@ebook), :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :tip, input_html: { rows: "20", cols: "150" } %>
+  <%= error_span(@everydaytip[:tip]) %>
+
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                @ebook.nil? ? everydaytip_path(@everydaytip) : ebook_path(@ebook), :class => 'btn btn-default' %>
+<% end %>

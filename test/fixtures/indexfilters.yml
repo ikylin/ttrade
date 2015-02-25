@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  script: MyText
+  platform: MyString
+  samplecount: 1
+  wincount: 1
+  losscount: 1
+  marketdatecount: 1
+
+two:
+  name: MyString
+  script: MyText
+  platform: MyString
+  samplecount: 1
+  wincount: 1
+  losscount: 1
+  marketdatecount: 1
